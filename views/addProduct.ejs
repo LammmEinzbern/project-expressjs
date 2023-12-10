@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="bg-body-tertiary">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <% if (messages.error) { %>
+                    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+                    <% } %>
+                <div class="card border-0 shadow rounded">
+                    <div class="card-body py-4">
+                        <form method="post" action="<%= action %>" enctype="multipart/form-data">
+                            <div class="form-group mb-4">
+                                <label class="mb-2" for="product_name">Name Product</label>
+                                <input type="text" class="form-control" name="product_name" value="<%= product_name %>" placeholder="Input Name Product" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="mb-2" for="product_price">Price</label>
+                                <input type="number" class="form-control" name="product_price" placeholder="Input Price" value="<%= product_price %>" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="mb-2" for="product_description">Description</label>
+                                <input type="text" class="form-control" name="product_description" placeholder="Input Description" value="<%= product_description %>" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="mb-2" for="product_type">Category</label>
+                                <select class="form-control" name="product_type" required>
+                                    <% if(product_type === 'Food') { %>
+                                        <option value="" disabled>select category</option>
+                                        <option value="Food" selected>Food</option>
+                                        <option value="Drink">Drink</option>
+                                    <% }else if(product_type === 'Drink') { %>
+                                        <option value="" disabled>select category</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Drink" selected>Drink</option>
+                                    <% }else { %>
+                                        <option value="" selected disabled>select category</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Drink">Drink</option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="product_image" class="mb-2">Image</label>
+                                <input type="file" onchange="document.getElementById('previewImage').src = window.URL.createObjectURL(this.files[0])" accept="image/*" class="form-control" name="product_image" value="<%= product_image %>" required>
+                                <img id="previewImage" src="/images/<%= product_image %>" alt="<%= product_image %>" width="100px">
+                            </div>
+                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                            <button type="reset" class="btn btn-warning">RESET</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
